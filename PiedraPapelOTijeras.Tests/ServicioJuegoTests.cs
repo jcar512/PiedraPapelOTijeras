@@ -29,5 +29,28 @@ namespace PiedraPapelOTijeras.Tests
             Assert.Equal(nombre2, juego.Jugador2.Nombre);
             Assert.Equal(puntaje, juego.PuntajeParaGanar);
         }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void ChequearPartida(bool iniciar)
+        {
+            string nombre1 = "Pedro";
+            string nombre2 = "Maria";
+            int puntaje = 5;
+
+            bool resultadoEsperado = iniciar;
+
+
+
+            if (iniciar)
+            {
+                _servicio.IniciarNuevaPartida(nombre1, nombre2, puntaje);
+            }
+
+            bool resultado = _servicio.HayPartidaIniciada();
+
+            Assert.Equal(iniciar, resultado);
+        }
     }
 }
